@@ -10,7 +10,7 @@ def load_data(request):
         scrape_and_index()
         # Guardar la fecha de la última actualización
         with open(LAST_UPDATED_FILE, "w") as f:
-            f.write(now().strftime("%Y-%m-%d %H:%M:%S"))
+            f.write(now().strftime("%d-%m-%Y %H:%M:%S"))
         message = "Data loaded successfully!"
     except Exception as e:
         message = f"Error loading data: {e}"
