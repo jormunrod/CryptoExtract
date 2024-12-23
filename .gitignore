@@ -49,6 +49,9 @@ celerybeat-schedule
 *.dockerignore
 Dockerfile
 
+# Whoosh
+crypto_index/
+
 # Others
 *.bak
 *.tmp
