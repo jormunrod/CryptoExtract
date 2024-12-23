@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+
 from .whoosh_utils import add_to_index
 
 
@@ -31,7 +32,8 @@ def fetch_crypto_data():
                 'name': cols[1].text.strip(),
                 'price': cols[3].find('fin-streamer', {'data-field': 'regularMarketPrice'}).text.strip(),
                 'change': cols[4].find('fin-streamer', {'data-field': 'regularMarketChange'}).text.strip(),
-                'percent_change': cols[5].find('fin-streamer', {'data-field': 'regularMarketChangePercent'}).text.strip(),
+                'percent_change': cols[5].find('fin-streamer',
+                                               {'data-field': 'regularMarketChangePercent'}).text.strip(),
                 'market_cap': cols[6].find('fin-streamer', {'data-field': 'marketCap'}).text.strip(),
                 'volume': cols[7].find('fin-streamer', {'data-field': 'regularMarketVolume'}).text.strip(),
                 'volume_in_currency_24h': cols[8].text.strip(),

@@ -56,3 +56,4 @@ crypto_index/
 *.bak
 *.tmp
 *.old
+last_updated.txt

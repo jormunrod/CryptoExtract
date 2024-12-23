@@ -8,24 +8,23 @@
     <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
 </head>
 <body>
-    <div class="navbar">
-        <a href="#" class="logo">CryptoExtract</a>
-        <ul class="nav-links">
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
-            <li class="dropdown">
-                <a href="#" class="dropbtn">Services</a>
-                <ul class="dropdown-content">
-                    <li><a href="#">Service 1</a></li>
-                    <li><a href="#">Service 2</a></li>
-                    <li><a href="#">Service 3</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <div class="content">
-        {% block content %}
-        {% endblock %}
-    </div>
+<div class="navbar">
+    <a href="#" class="logo">CryptoExtract</a>
+    <ul class="nav-links">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropbtn">Options</a>
+            <ul class="dropdown-content">
+                <li><a href="{% url 'load_data' %}">Load Data</a></li>
+            </ul>
+        </li>
+
+    </ul>
+</div>
+<div class="content">
+    {% block content %}
+    {% endblock %}
+</div>
 </body>
 </html>
