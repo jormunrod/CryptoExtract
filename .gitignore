@@ -1,0 +1,55 @@
+# SO
+*.DS_Store
+Thumbs.db
+
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.env
+*.venv
+ENV/
+env/
+venv/
+.Python
+*.log
+
+# Configuration files
+*.sqlite3
+*.db
+db.sqlite3-journal
+*.migrations/
+
+# Web files
+staticfiles/
+static/
+media/
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+
+# Configuration files
+.coverage
+*.cover
+coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.code-workspace
+
+# Logs
+*.log
+*.pid
+celerybeat-schedule
+
+# Docker
+*.dockerignore
+Dockerfile
+
+# Others
+*.bak
+*.tmp
+*.old
