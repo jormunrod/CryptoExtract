@@ -86,3 +86,4 @@ def format_large_number(value):
         return f"{value:.2f}"  # Smaller numbers
     except (ValueError, TypeError):
         return "N/A"  # Fallback for invalid or missing values
+

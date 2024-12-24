@@ -1,7 +1,11 @@
 from django.shortcuts import redirect
+from django.shortcuts import render
 from django.utils.timezone import now
 
+from core.utils import get_last_updated
+from .utils import format_large_number
 from .utils import scrape_and_index
+from .whoosh_utils import create_or_open_index
 
 LAST_UPDATED_FILE = "last_updated.txt"
 
@@ -18,14 +22,10 @@ def load_data(request):
     return redirect('home')
 
 
-from django.shortcuts import render
-from .whoosh_utils import create_or_open_index
-from .utils import format_large_number
-
-
 def list_all_data(request):
     index_dir = "crypto_index"
     all_data = []
+    last_updated = get_last_updated()
 
     try:
         ix = create_or_open_index(index_dir)
@@ -49,4 +49,4 @@ def list_all_data(request):
         all_data = []
         print(f"Error retrieving data: {e}")
 
-    return render(request, 'scraper/list_all_data.html', {'all_data': all_data})
+    return render(request, 'scraper/list_all_data.html', {'all_data': all_data, 'last_updated': last_updated})
