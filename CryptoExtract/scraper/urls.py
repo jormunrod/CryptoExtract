@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
     path('load-data/', views.load_data, name='load_data'),
+    path('all-data/', views.list_all_data, name='list_all_data'),
 ]

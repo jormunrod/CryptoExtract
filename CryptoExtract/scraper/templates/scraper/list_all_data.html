@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h2 style="text-align: center;">All Cryptocurrency Data</h2>
+
+<div class="table-wrapper">
+    <div class="data-table-container">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>$ Price</th>
+                    <th>Change</th>
+                    <th>% Change</th>
+                    <th>Market Cap</th>
+                    <th>Volume</th>
+                    <th>Volume (24h)</th>
+                    <th>Total Volume (24h)</th>
+                    <th>Circulating Supply</th>
+                    <th>52-Week % Change</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in all_data %}
+                    <tr>
+                        <td>{{ data.name }}</td>
+                        <td>{{ data.price }}</td>
+                        <td>{{ data.change }}</td>
+                        <td>{{ data.percent_change }}</td>
+                        <td>{{ data.market_cap }}</td>
+                        <td>{{ data.volume }}</td>
+                        <td>{{ data.volume_in_currency_24h }}</td>
+                        <td>{{ data.total_volume_all_currencies_24h }}</td>
+                        <td>{{ data.circulating_supply }}</td>
+                        <td>{{ data.week_change_percent }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% if not all_data %}
+    <p style="text-align: center;">No data available. Please load the data first.</p>
+{% endif %}
+{% endblock %}
