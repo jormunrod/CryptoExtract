@@ -1,7 +1,8 @@
 import os
+
 from whoosh import index
 from whoosh.fields import Schema, TEXT, NUMERIC
-from whoosh.qparser import QueryParser
+from whoosh.query import Every, Wildcard
 
 
 # Define the schema
@@ -72,10 +73,17 @@ def add_to_index(index_dir, crypto_data):
 
 # Search the index
 def search_index(index_dir, query_str, field="name"):
-    ix = create_or_open_index(index_dir)
+    """
+        Search the Whoosh index for a partial match using WildcardQuery.
+    """
+    ix = index.open_dir(index_dir)
     with ix.searcher() as searcher:
-        query = QueryParser(field, ix.schema).parse(query_str)
-        results = searcher.search(query, limit=10)
+        if not query_str.strip():
+            results = searcher.search(Every(field), limit=None)
+        else:
+            # Use a wildcard query to match substrings
+            query = Wildcard(field, f"*{query_str.lower()}*")
+            results = searcher.search(query, limit=50)
         return [
             {
                 "name": result["name"],

@@ -5,7 +5,7 @@ from django.utils.timezone import now
 from core.utils import get_last_updated
 from .utils import format_large_number
 from .utils import scrape_and_index
-from .whoosh_utils import create_or_open_index
+from .whoosh_utils import create_or_open_index, search_index
 
 LAST_UPDATED_FILE = "last_updated.txt"
 
@@ -50,3 +50,33 @@ def list_all_data(request):
         print(f"Error retrieving data: {e}")
 
     return render(request, 'scraper/list_all_data.html', {'all_data': all_data, 'last_updated': last_updated})
+
+
+def search_cryptos(request):
+    query = request.GET.get('q', '')
+    results = []
+
+    if query:
+        index_dir = "crypto_index"
+        try:
+            raw_results = search_index(index_dir, query, field="name")
+
+            results = [
+                {
+                    "name": crypto["name"],
+                    "price": f"${float(crypto['price']):,.2f}",
+                    "change": f"${float(crypto['change']):,.2f}",
+                    "percent_change": f"{crypto['percent_change']:.2f}%",
+                    "market_cap": format_large_number(crypto["market_cap"]),
+                    "volume": format_large_number(crypto["volume"]),
+                    "volume_in_currency_24h": format_large_number(crypto["volume_in_currency_24h"]),
+                    "total_volume_all_currencies_24h": format_large_number(crypto["total_volume_all_currencies_24h"]),
+                    "circulating_supply": format_large_number(crypto["circulating_supply"]),
+                    "week_change_percent": f"{crypto['week_change_percent']:.2f}%",
+                }
+                for crypto in raw_results
+            ]
+        except Exception as e:
+            print(f"Error searching the index: {e}")
+
+    return render(request, 'scraper/search.html', {'query': query, 'results': results})
