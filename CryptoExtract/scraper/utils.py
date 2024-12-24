@@ -1,7 +1,10 @@
+import os
+
 import requests
 from bs4 import BeautifulSoup
+from whoosh import index
 
-from .whoosh_utils import add_to_index
+from .whoosh_utils import add_to_index, get_schema
 
 
 def fetch_crypto_data():
@@ -50,6 +53,16 @@ def fetch_crypto_data():
 
 def scrape_and_index():
     index_dir = "crypto_index"
+
+    # Recreate the index safely
+    if os.path.exists(index_dir):
+        for file in os.listdir(index_dir):
+            file_path = os.path.join(index_dir, file)
+            os.remove(file_path)
+
+    # Create a new index
+    ix = index.create_in(index_dir, schema=get_schema())
+
     try:
         crypto_data = fetch_crypto_data()
         add_to_index(index_dir, crypto_data)

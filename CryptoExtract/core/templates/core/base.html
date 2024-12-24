@@ -14,7 +14,7 @@
         <li class="dropdown">
             <a href="#" class="dropbtn">Options</a>
             <ul class="dropdown-content">
-                <li><a href="{% url 'load_data' %}">Load Data</a></li>
+                <li><a href="{% url 'load_data' %}" onclick="return confirmLoadData()">Load data</a></li>
                 <li><a href="{% url 'list_all_data' %}">List all data</a></li>
             </ul>
         </li>
@@ -25,5 +25,10 @@
     {% block content %}
     {% endblock %}
 </div>
+<script>
+    function confirmLoadData() {
+        return confirm("This will overwrite the existing data. Do you want to proceed?");
+    }
+</script>
 </body>
 </html>
