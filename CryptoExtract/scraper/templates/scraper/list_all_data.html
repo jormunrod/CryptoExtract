@@ -1,11 +1,11 @@
 {% extends 'core/base.html' %}
 {% block content %}
-<h2 style="text-align: center;">All Cryptocurrency Data</h2>
+    <h2 style="text-align: center;">All Cryptocurrency Data</h2>
 
-<div class="table-wrapper">
-    <div class="data-table-container">
-        <table class="data-table">
-            <thead>
+    <div class="table-wrapper">
+        <div class="data-table-container">
+            <table class="data-table">
+                <thead>
                 <tr>
                     <th>Name</th>
                     <th>$ Price</th>
@@ -18,8 +18,8 @@
                     <th>Circulating Supply</th>
                     <th>52-Week % Change</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 {% for data in all_data %}
                     <tr>
                         <td>{{ data.name }}</td>
@@ -34,12 +34,12 @@
                         <td>{{ data.week_change_percent }}</td>
                     </tr>
                 {% endfor %}
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 
-{% if not all_data %}
-    <p style="text-align: center;">No data available. Please load the data first.</p>
-{% endif %}
+    {% if not all_data %}
+        <p style="text-align: center;">No data available. Please load the data first.</p>
+    {% endif %}
 {% endblock %}

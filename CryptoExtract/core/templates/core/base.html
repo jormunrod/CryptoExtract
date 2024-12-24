@@ -9,10 +9,8 @@
 </head>
 <body>
 <div class="navbar">
-    <a href="#" class="logo">CryptoExtract</a>
+    <a href="{% url 'home' %}" class="logo">CryptoExtract</a>
     <ul class="nav-links">
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'about' %}">About</a></li>
         <li class="dropdown">
             <a href="#" class="dropbtn">Options</a>
             <ul class="dropdown-content">
@@ -20,7 +18,7 @@
                 <li><a href="{% url 'list_all_data' %}">List all data</a></li>
             </ul>
         </li>
-
+        <li><a href="{% url 'about' %}">About</a></li>
     </ul>
 </div>
 <div class="content">

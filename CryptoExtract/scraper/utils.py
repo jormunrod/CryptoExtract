@@ -55,3 +55,21 @@ def scrape_and_index():
         add_to_index(index_dir, crypto_data)
     except Exception as e:
         raise Exception(f"Scraping and indexing failed: {e}")
+
+
+def format_large_number(value):
+    """
+    Converts a large number into a human-readable string with suffixes.
+    e.g., 1_000_000 -> "1M", 1_000_000_000 -> "1B", 1_000_000_000_000 -> "1T"
+    """
+    try:
+        value = float(value)
+        if value >= 1_000_000_000_000:  # Trillions
+            return f"{value / 1_000_000_000_000:.2f}T"
+        elif value >= 1_000_000_000:  # Billions
+            return f"{value / 1_000_000_000:.2f}B"
+        elif value >= 1_000_000:  # Millions
+            return f"{value / 1_000_000:.2f}M"
+        return f"{value:.2f}"  # Smaller numbers
+    except (ValueError, TypeError):
+        return "N/A"  # Fallback for invalid or missing values
