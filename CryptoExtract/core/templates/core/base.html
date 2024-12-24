@@ -9,34 +9,41 @@
     <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
 </head>
 <body>
-<div class="navbar">
-    <a href="{% url 'home' %}" class="logo">CryptoExtract</a>
-    <ul class="nav-links">
-        <li class="dropdown">
-            <a href="#" class="dropbtn">Options</a>
-            <ul class="dropdown-content">
-                <li><a href="{% url 'load_data' %}" onclick="return confirmLoadData()">Load data</a></li>
-                <li><a href="{% url 'list_all_data' %}">List all data</a></li>
+    <div class="wrapper">
+        <!-- Navbar -->
+        <div class="navbar">
+            <a href="{% url 'home' %}" class="logo">CryptoExtract</a>
+            <ul class="nav-links">
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Options</a>
+                    <ul class="dropdown-content">
+                        <li><a href="{% url 'load_data' %}" onclick="return confirmLoadData()">Load data</a></li>
+                        <li><a href="{% url 'list_all_data' %}">List all data</a></li>
+                    </ul>
+                </li>
+                <li><a href="{% url 'about' %}">About</a></li>
             </ul>
-        </li>
-        <li><a href="{% url 'about' %}">About</a></li>
-    </ul>
-</div>
-<div class="content">
-    {% block content %}
-    {% endblock %}
-</div>
-<script>
-    function confirmLoadData() {
-        return confirm("This will overwrite the existing data. Do you want to proceed?");
-    }
-</script>
-<footer class="footer">
-    <p>Developed by <strong>Jorge Muñoz</strong> as a final project for <strong>Acceso Inteligente a la
-        Información</strong>.</p>
-    <p>
-        Licensed under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a> © 2024.
-    </p>
-</footer>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Developed by <strong>Jorge Muñoz</strong> as a final project for <strong>Acceso Inteligente a la Información</strong>.</p>
+            <p>
+                Licensed under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a> © 2024.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        function confirmLoadData() {
+            return confirm("This will overwrite the existing data. Do you want to proceed?");
+        }
+    </script>
 </body>
 </html>
