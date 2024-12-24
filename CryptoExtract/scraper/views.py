@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.utils.timezone import now
 
 from core.utils import get_last_updated
-from .utils import format_large_number
+from .utils import format_crypto_data
 from .utils import scrape_and_index
 from .whoosh_utils import create_or_open_index, search_index
 
@@ -31,20 +31,7 @@ def list_all_data(request):
         ix = create_or_open_index(index_dir)
         with ix.searcher() as searcher:
             for doc in searcher.all_stored_fields():
-                all_data.append(
-                    {
-                        'name': doc['name'],
-                        'price': f"${float(doc['price']):,.2f}",
-                        'change': f"${float(doc['change']):,.2f}",
-                        'percent_change': f"{float(doc['percent_change']):.2f}%",
-                        'market_cap': format_large_number(doc['market_cap']),
-                        'volume': format_large_number(doc['volume']),
-                        'volume_in_currency_24h': format_large_number(doc['volume_in_currency_24h']),
-                        'total_volume_all_currencies_24h': format_large_number(doc['total_volume_all_currencies_24h']),
-                        'circulating_supply': format_large_number(doc['circulating_supply']),
-                        'week_change_percent': f"{float(doc['week_change_percent']):.2f}%",
-                    }
-                )
+                all_data.append(format_crypto_data(doc))
     except Exception as e:
         all_data = []
         print(f"Error retrieving data: {e}")
@@ -60,23 +47,32 @@ def search_cryptos(request):
         index_dir = "crypto_index"
         try:
             raw_results = search_index(index_dir, query, field="name")
-
-            results = [
-                {
-                    "name": crypto["name"],
-                    "price": f"${float(crypto['price']):,.2f}",
-                    "change": f"${float(crypto['change']):,.2f}",
-                    "percent_change": f"{crypto['percent_change']:.2f}%",
-                    "market_cap": format_large_number(crypto["market_cap"]),
-                    "volume": format_large_number(crypto["volume"]),
-                    "volume_in_currency_24h": format_large_number(crypto["volume_in_currency_24h"]),
-                    "total_volume_all_currencies_24h": format_large_number(crypto["total_volume_all_currencies_24h"]),
-                    "circulating_supply": format_large_number(crypto["circulating_supply"]),
-                    "week_change_percent": f"{crypto['week_change_percent']:.2f}%",
-                }
-                for crypto in raw_results
-            ]
+            results = [format_crypto_data(crypto) for crypto in raw_results]
         except Exception as e:
             print(f"Error searching the index: {e}")
 
     return render(request, 'scraper/search.html', {'query': query, 'results': results})
+
+
+def top_5_crypto_by_change(request):
+    index_dir = "crypto_index"
+    top_cryptos = []
+
+    try:
+        ix = create_or_open_index(index_dir)
+        with ix.searcher() as searcher:
+            # Obtener todos los documentos del índice
+            results = list(searcher.all_stored_fields())
+
+            # Ordenar por 'percent_change' descendente
+            sorted_results = sorted(
+                results,
+                key=lambda doc: float(doc['percent_change']),
+                reverse=True
+            )
+            top_cryptos = [format_crypto_data(doc) for doc in sorted_results[:5]]
+
+    except Exception as e:
+        print(f"Error retrieving data: {e}")
+
+    return render(request, 'scraper/top_5_crypto_by_change.html', {'top_cryptos': top_cryptos})

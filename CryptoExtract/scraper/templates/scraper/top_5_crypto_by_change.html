@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="top-cryptos-container">
+    <h1>Top 5 Cryptocurrencies by % Change</h1>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>% Change</th>
+                <th>Market Cap</th>
+                <th>Volume</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for crypto in top_cryptos %}
+                <tr>
+                    <td>{{ crypto.name }}</td>
+                    <td>{{ crypto.price }}</td>
+                    <td>{{ crypto.percent_change }}</td>
+                    <td>{{ crypto.market_cap }}</td>
+                    <td>{{ crypto.volume }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if not top_cryptos %}
+        <p>No data available. Please load the data first.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -87,3 +87,20 @@ def format_large_number(value):
     except (ValueError, TypeError):
         return "N/A"  # Fallback for invalid or missing values
 
+
+def format_crypto_data(doc):
+    """
+    Formatea un documento de Whoosh para que los valores numéricos sean más legibles.
+    """
+    return {
+        'name': doc['name'],
+        'price': f"${float(doc['price']):,.2f}",
+        'change': f"${float(doc['change']):,.2f}",
+        'percent_change': f"{float(doc['percent_change']):.2f}%",
+        'market_cap': format_large_number(doc['market_cap']),
+        'volume': format_large_number(doc['volume']),
+        'volume_in_currency_24h': format_large_number(doc['volume_in_currency_24h']),
+        'total_volume_all_currencies_24h': format_large_number(doc['total_volume_all_currencies_24h']),
+        'circulating_supply': format_large_number(doc['circulating_supply']),
+        'week_change_percent': f"{float(doc['week_change_percent']):.2f}%",
+    }
