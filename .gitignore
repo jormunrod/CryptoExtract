@@ -13,7 +13,6 @@ ENV/
 env/
 venv/
 .Python
-*.log
 
 # Configuration files
 *.sqlite3
