@@ -20,11 +20,6 @@ venv/
 db.sqlite3-journal
 *.migrations/
 
-# Web files
-staticfiles/
-static/
-media/
-
 # Editor/IDE
 .vscode/
 .idea/
