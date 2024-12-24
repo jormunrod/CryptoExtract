@@ -1,5 +1,21 @@
 {% extends 'core/base.html' %}
+
 {% block content %}
-<h2>Welcome to CryptoExtract</h2>
-<p><strong>Data updated at:</strong> {{ last_updated }}</p>
+    <div class="homepage-container">
+        <div class="welcome-section">
+            <h1>Welcome to <span>CryptoExtract</span></h1>
+            <p>Your ultimate platform for cryptocurrency insights.</p>
+            <p><strong>Data updated at:</strong> {{ last_updated }}</p>
+        </div>
+
+        <div class="action-buttons">
+            <a href="{% url 'load_data' %}" onclick="return confirmLoadData()" class="btn btn-primary">Load data</a>
+            <a href="{% url 'list_all_data' %}" class="btn btn-secondary">View Data</a>
+        </div>
+    </div>
+    <script>
+        function confirmLoadData() {
+            return confirm("This will overwrite the existing data. Do you want to proceed?");
+        }
+    </script>
 {% endblock %}
