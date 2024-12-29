@@ -2,3 +2,5 @@ django
 beautifulsoup4
 requests
 whoosh
+plotly
+pandas

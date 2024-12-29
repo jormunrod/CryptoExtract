@@ -1,3 +1,4 @@
+import plotly.express as px
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.utils.timezone import now
@@ -102,3 +103,33 @@ def filter_by_price(request):
             print(f"Error filtering data: {e}")
 
     return render(request, 'scraper/filter_by_price.html', {'filtered_cryptos': filtered_cryptos})
+
+def market_cap_distribution(request):
+    index_dir = "crypto_index"
+    crypto_data = []
+
+    try:
+        ix = create_or_open_index(index_dir)
+        with ix.searcher() as searcher:
+            for doc in searcher.all_stored_fields():
+                crypto_data.append({
+                    'name': doc['name'],
+                    'market_cap': float(doc['market_cap']),
+                })
+
+        # Order by market cap and get the top 10
+        top_cryptos = sorted(crypto_data, key=lambda x: x['market_cap'], reverse=True)[:10]
+
+        # Generate pie chart with the top 10 cryptocurrencies by market cap
+        fig = px.pie(
+            top_cryptos,
+            names='name',
+            values='market_cap',
+        )
+        chart = fig.to_html(full_html=False)
+
+    except Exception as e:
+        print(f"Error generating market cap chart: {e}")
+        chart = None
+
+    return render(request, 'scraper/market_cap_distribution.html', {'chart': chart})

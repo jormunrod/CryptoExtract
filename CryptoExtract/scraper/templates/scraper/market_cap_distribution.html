@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="chart-container">
+    <h1>Market Capitalization Distribution</h1>
+    <p>Top 10 Cryptocurrencies by Market Capitalization</p>
+
+    {% if chart %}
+        <div>
+            {{ chart|safe }}
+        </div>
+    {% else %}
+        <p>No data available to generate the chart.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -471,5 +471,30 @@ body {
     background-color: #005cc5;
 }
 
+/* =============================================== */
+/* Chart Styles */
+/* =============================================== */
+.chart-container {
+    text-align: center;
+    padding: 2rem;
+}
+
+.chart-container h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #24292f;
+}
+
+.chart-container p {
+    font-size: 1.2rem;
+    color: #586069;
+    margin-bottom: 1.5rem;
+}
+
+.chart-container div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
