@@ -1,0 +1,86 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="comparison-container">
+    <h1>Compare Cryptocurrencies</h1>
+
+    <!-- Form to select cryptocurrencies to compare -->
+    <form method="get" action="{% url 'compare_cryptos' %}" class="form-container">
+    <label for="crypto1">Select Cryptocurrency 1:</label>
+    <select name="crypto" id="crypto1" required>
+        <option value="" disabled {% if not selected_cryptos %}selected{% endif %}>Choose a cryptocurrency</option>
+        {% for name in all_names %}
+            <option value="{{ name }}" {% if name == selected_cryptos.0 %}selected{% endif %}>
+                {{ name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <label for="crypto2">Select Cryptocurrency 2:</label>
+    <select name="crypto" id="crypto2" required>
+        <option value="" disabled {% if not selected_cryptos %}selected{% endif %}>Choose a cryptocurrency</option>
+        {% for name in all_names %}
+            <option value="{{ name }}" {% if name == selected_cryptos.1 %}selected{% endif %}>
+                {{ name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Compare</button>
+</form>
+
+
+    <!-- Results table -->
+    {% if compared_data %}
+    <h2>Comparison Results</h2>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Metric</th>
+                <th>{{ compared_data.0.name }}</th>
+                <th>{{ compared_data.1.name }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Price</td>
+                <td>{{ compared_data.0.price }}</td>
+                <td>{{ compared_data.1.price }}</td>
+            </tr>
+            <tr>
+                <td>Change</td>
+                <td>{{ compared_data.0.change }}</td>
+                <td>{{ compared_data.1.change }}</td>
+            </tr>
+            <tr>
+                <td>% Change</td>
+                <td>{{ compared_data.0.percent_change }}</td>
+                <td>{{ compared_data.1.percent_change }}</td>
+            </tr>
+            <tr>
+                <td>Market Cap</td>
+                <td>{{ compared_data.0.market_cap }}</td>
+                <td>{{ compared_data.1.market_cap }}</td>
+            </tr>
+            <tr>
+                <td>Volume</td>
+                <td>{{ compared_data.0.volume }}</td>
+                <td>{{ compared_data.1.volume }}</td>
+            </tr>
+            <tr>
+                <td>Circulating Supply</td>
+                <td>{{ compared_data.0.circulating_supply }}</td>
+                <td>{{ compared_data.1.circulating_supply }}</td>
+            </tr>
+            <tr>
+                <td>52-Week % Change</td>
+                <td>{{ compared_data.0.week_change_percent }}</td>
+                <td>{{ compared_data.1.week_change_percent }}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% else %}
+    <p>Select two cryptocurrencies to compare.</p>
+    {% endif %}
+</div>
+{% endblock %}

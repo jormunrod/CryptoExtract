@@ -2,6 +2,7 @@ import plotly.express as px
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.utils.timezone import now
+from whoosh.qparser import QueryParser
 
 from core.utils import get_last_updated
 from .utils import format_crypto_data
@@ -104,6 +105,7 @@ def filter_by_price(request):
 
     return render(request, 'scraper/filter_by_price.html', {'filtered_cryptos': filtered_cryptos})
 
+
 def market_cap_distribution(request):
     index_dir = "crypto_index"
     crypto_data = []
@@ -133,3 +135,34 @@ def market_cap_distribution(request):
         chart = None
 
     return render(request, 'scraper/market_cap_distribution.html', {'chart': chart})
+
+
+def compare_cryptos(request):
+    selected_cryptos = request.GET.getlist('crypto')
+    compared_data = []
+    all_names = []
+
+    try:
+        index_dir = "crypto_index"
+        ix = create_or_open_index(index_dir)
+        with ix.searcher() as searcher:
+            for doc in searcher.all_stored_fields():
+                all_names.append(doc['name'])
+                print(f"documetos: {doc}")
+
+            if len(selected_cryptos) == 2:
+                print(f"Comparing {selected_cryptos[0]} and {selected_cryptos[1]}")
+                for crypto in selected_cryptos:
+                    query = QueryParser("name", ix.schema).parse(crypto)
+                    results = list(searcher.search(query, limit=1))
+                    print(f"Results for {crypto}: {results}")
+                    if results:
+                        compared_data.append(format_crypto_data(results[0]))
+    except Exception as e:
+        print(f"Error comparing data: {e}")
+
+    return render(request, 'scraper/compare_cryptos.html', {
+        'compared_data': compared_data,
+        'selected_cryptos': selected_cryptos,
+        'all_names': all_names,
+    })
