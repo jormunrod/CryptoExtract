@@ -76,3 +76,29 @@ def top_5_crypto_by_change(request):
         print(f"Error retrieving data: {e}")
 
     return render(request, 'scraper/top_5_crypto_by_change.html', {'top_cryptos': top_cryptos})
+
+
+def filter_by_price(request):
+    min_price = request.GET.get('min_price', '')
+    max_price = request.GET.get('max_price', '')
+    filtered_cryptos = []
+
+    if min_price and max_price:
+        index_dir = "crypto_index"
+        try:
+            ix = create_or_open_index(index_dir)
+            with ix.searcher() as searcher:
+                # Get all documents from the index
+                results = list(searcher.all_stored_fields())
+
+                # Filter by price range
+                filtered_cryptos = [
+                    format_crypto_data(doc) for doc in results
+                    if float(min_price) <= float(doc['price']) <= float(max_price)
+                ]
+
+
+        except Exception as e:
+            print(f"Error filtering data: {e}")
+
+    return render(request, 'scraper/filter_by_price.html', {'filtered_cryptos': filtered_cryptos})

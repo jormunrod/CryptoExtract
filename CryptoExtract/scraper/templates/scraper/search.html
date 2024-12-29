@@ -4,8 +4,10 @@
 <div class="search-container">
     <h1>Search Cryptocurrencies</h1>
     <form method="get" action="{% url 'search_cryptos' %}">
-        <input type="text" name="q" placeholder="Search by name..." value="{{ query }}" class="search-input">
-        <button type="submit" class="btn btn-primary">Search</button>
+        <label>
+            <input type="text" name="q" placeholder="Search by name..." value="{{ query }}" class="search-input">
+        </label>
+        <button type="submit">Search</button>
     </form>
 
     {% if query %}
