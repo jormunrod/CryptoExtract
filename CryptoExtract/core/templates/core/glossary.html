@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+    <div class="glossary-container">
+        <h1>Cryptocurrency Glossary</h1>
+        <p>Here you will find definitions for common terms used in the world of cryptocurrency.</p>
+
+        <div class="glossary-list">
+            {% for term, definition in terms.items %}
+                <div class="glossary-item">
+                    <h3>{{ term }}</h3>
+                    <p>{{ definition }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
