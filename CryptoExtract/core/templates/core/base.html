@@ -14,10 +14,10 @@
         <div class="navbar">
             <a href="{% url 'home' %}" class="logo">CryptoExtract</a>
             <ul class="nav-links">
+                <li><a href="{% url 'load_data' %}" onclick="return confirmLoadData()">Load data</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropbtn">Options</a>
                     <ul class="dropdown-content">
-                        <li><a href="{% url 'load_data' %}" onclick="return confirmLoadData()">Load data</a></li>
                         <li><a href="{% url 'list_all_data' %}">View data</a></li>
                         <li><a href="{% url 'search_cryptos' %}">Search cryptocurrencies</a></li>
                         <li><a href="{% url 'top_5_crypto_by_change' %}">Top 5 cryptos by % change</a></li>
