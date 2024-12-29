@@ -105,12 +105,12 @@ body {
     top: calc(100% + 5px);
     left: 0;
     background-color: #24292f;
-    min-width: 200px;
+    min-width: 100px;
+    max-width: 250px;
     padding: 0.5rem 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
     z-index: 1000;
     border-radius: 4px;
-    overflow: hidden;
     margin-top: -5px;
 }
 
@@ -124,7 +124,11 @@ body {
     text-decoration: none;
     display: block;
     font-size: 0.9rem;
-    transition: background-color 0.3s;
+    text-align: left;
+    word-wrap: break-word;
+    white-space: normal;
+    line-height: 1.4;
+    transition: background-color 0.3s ease;
 }
 
 .dropdown .dropdown-content a:hover {
