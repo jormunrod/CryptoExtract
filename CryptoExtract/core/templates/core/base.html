@@ -9,47 +9,48 @@
     <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
 </head>
 <body>
-    <div class="wrapper">
-        <!-- Navbar -->
-        <div class="navbar">
-            <a href="{% url 'home' %}" class="logo">CryptoExtract</a>
-            <ul class="nav-links">
-                <li><a href="{% url 'load_data' %}" onclick="return confirmLoadData()">Load data</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropbtn">Options</a>
-                    <ul class="dropdown-content">
-                        <li><a href="{% url 'list_all_data' %}">View data</a></li>
-                        <li><a href="{% url 'search_cryptos' %}">Search cryptocurrencies</a></li>
-                        <li><a href="{% url 'top_5_crypto_by_change' %}">Top 5 cryptos by % change</a></li>
-                        <li><a href="{% url 'filter_by_price' %}">Filter by price</a></li>
-                        <li><a href="{% url 'market_cap_distribution' %}">Market cap chart</a></li>
-                        <li><a href="{% url 'compare_cryptos' %}">Compare cryptos</a></li>
-                        <li><a href="{% url 'price_vs_volume' %}">Price vs. Volume chart</a></li>
-                    </ul>
-                </li>
-                <li><a href="{% url 'about' %}">About</a></li>
-            </ul>
-        </div>
-
-        <!-- Main Content -->
-        <div class="content">
-            {% block content %}
-            {% endblock %}
-        </div>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <p>Developed by <strong>Jorge Muñoz</strong> as a final project for <strong>Acceso Inteligente a la Información</strong>.</p>
-            <p>
-                Licensed under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a> © 2024.
-            </p>
-        </footer>
+<div class="wrapper">
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="{% url 'home' %}" class="logo">CryptoExtract</a>
+        <ul class="nav-links">
+            <li><a href="{% url 'load_data' %}" onclick="return confirmLoadData()">Load data</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Options</a>
+                <ul class="dropdown-content">
+                    <li><a href="{% url 'list_all_data' %}">View data</a></li>
+                    <li><a href="{% url 'search_cryptos' %}">Search cryptocurrencies</a></li>
+                    <li><a href="{% url 'compare_cryptos' %}">Compare cryptos</a></li>
+                    <li><a href="{% url 'filter_by_price' %}">Filter by price</a></li>
+                    <li><a href="{% url 'top_5_crypto_by_change' %}">Top 5 cryptos by % change</a></li>
+                    <li><a href="{% url 'market_cap_distribution' %}">Market cap chart</a></li>
+                    <li><a href="{% url 'price_vs_volume' %}">Price vs. Volume chart</a></li>
+                </ul>
+            </li>
+            <li><a href="{% url 'about' %}">About</a></li>
+        </ul>
     </div>
 
-    <script>
-        function confirmLoadData() {
-            return confirm("This will overwrite the existing data. Do you want to proceed?");
-        }
-    </script>
+    <!-- Main Content -->
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Developed by <strong>Jorge Muñoz</strong> as a final project for <strong>Acceso Inteligente a la
+            Información</strong>.</p>
+        <p>
+            Licensed under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a> © 2024.
+        </p>
+    </footer>
+</div>
+
+<script>
+    function confirmLoadData() {
+        return confirm("This will overwrite the existing data. Do you want to proceed?");
+    }
+</script>
 </body>
 </html>

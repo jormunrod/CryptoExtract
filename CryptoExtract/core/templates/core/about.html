@@ -1,45 +1,80 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-<div class="about-container">
-    <div class="about-header">
-        <h1>About <span>CryptoExtract</span></h1>
-        <p>Learn more about our project and how it works.</p>
+    <div class="about-container">
+        <div class="about-header">
+            <h1>About <span>CryptoExtract</span></h1>
+            <p>Learn more about our project and how it works.</p>
+        </div>
+
+        <div class="about-content">
+            <section class="about-section">
+                <h2>What is CryptoExtract?</h2>
+                <p>
+                    CryptoExtract is a web application designed as a final project for the course
+                    <strong>Acceso Inteligente a la Información</strong>. It provides a platform to scrape, index, and
+                    analyze cryptocurrency data from
+                    <a href="https://finance.yahoo.com/markets/crypto/all/" target="_blank">Yahoo Finance</a>.
+                </p>
+            </section>
+
+            <section class="about-section">
+                <h2>How does it work?</h2>
+                <p>
+                    The project uses <strong>BeautifulSoup</strong> for web scraping to fetch real-time cryptocurrency
+                    data. The data is then indexed
+                    using <strong>Whoosh</strong>, allowing for fast and efficient querying and analysis. Users can
+                    interact with the data through
+                    various views and tools available on the platform.
+                </p>
+            </section>
+
+            <section class="about-section">
+                <h2>Features</h2>
+                <p>The application includes the following functionalities:</p>
+                <ul>
+                    <li><strong>Home Page:</strong> Provides an overview of the project and displays the last time the
+                        data was updated.
+                    </li>
+                    <li><strong>Load Data:</strong> Fetches real-time cryptocurrency data from Yahoo Finance and
+                        overwrites the existing data.
+                    </li>
+                    <li><strong>View Data:</strong> Displays all the indexed cryptocurrencies in a responsive table with
+                        sortable and scrollable features.
+                    </li>
+                    <li><strong>Search Cryptocurrencies:</strong> Enables users to search for cryptocurrencies by name
+                        using a robust search engine.
+                    </li>
+                    <li><strong>Compare Cryptocurrencies:</strong> Enables users to compare two cryptocurrencies side by
+                        side, showing metrics like price, market cap, and more.
+                    </li>
+                    <li><strong>Price Range Filter:</strong> Allows users to filter cryptocurrencies by specifying a
+                        price range.
+                    </li>
+                    <li><strong>Top 5 by Percentage Change:</strong> Displays the top 5 cryptocurrencies with the
+                        highest percentage change in the last 24 hours.
+                    </li>
+                    <li><strong>Market Cap Chart:</strong> Displays a bar chart comparing the market capitalization of
+                        cryptocurrencies, providing a clear visualization of their relative sizes.
+                    </li>
+                    <li><strong>Scatter Plot (Price vs. Volume):</strong> Visualizes the relationship between the price
+                        and trading volume of cryptocurrencies using an interactive chart.
+                    </li>
+
+                </ul>
+            </section>
+
+            <section class="about-section">
+                <h2>Developed By</h2>
+                <p>
+                    This project was developed by <strong>Jorge Muñoz Rodríguez</strong> as part of a university
+                    assignment for the course
+                    <strong>Acceso Inteligente a la Información</strong>. It demonstrates the integration of web
+                    scraping, data indexing,
+                    and visualization tools in a cohesive web application.
+                </p>
+            </section>
+
+        </div>
     </div>
-
-    <div class="about-content">
-        <section class="about-section">
-            <h2>What is CryptoExtract?</h2>
-            <p>
-                CryptoExtract is a web application designed as a final project for the course
-                <strong>Acceso Inteligente a la Información</strong>. It provides a platform to scrape, index, and analyze cryptocurrency data from
-                <a href="https://finance.yahoo.com/markets/crypto/all/" target="_blank">Yahoo Finance</a>.
-            </p>
-        </section>
-
-        <section class="about-section">
-            <h2>How does it work?</h2>
-            <p>
-                The project works by fetching real-time cryptocurrency data using web scraping techniques with
-                <strong>BeautifulSoup</strong>. The data is then indexed using <strong>Whoosh</strong>, a fast and efficient search engine library for Python.
-            </p>
-        </section>
-
-        <section class="about-section">
-            <h2>Features</h2>
-            <ul>
-                <li>Real-time data scraping from Yahoo Finance.</li>
-                <li>Efficient data indexing and search functionality.</li>
-                <li>Responsive and user-friendly interface.</li>
-            </ul>
-        </section>
-
-        <section class="about-section">
-            <h2>Developed By</h2>
-            <p>
-                This project was developed by <strong>Jorge Muñoz Rodríguez</strong> as part of a university assignment.
-            </p>
-        </section>
-    </div>
-</div>
 {% endblock %}
