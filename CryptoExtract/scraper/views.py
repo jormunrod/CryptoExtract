@@ -127,6 +127,7 @@ def market_cap_distribution(request):
             top_cryptos,
             names='name',
             values='market_cap',
+            labels={'name': 'Crypto', 'market_cap': 'Market Cap (USD)'},
         )
         chart = fig.to_html(full_html=False)
 
@@ -166,3 +167,35 @@ def compare_cryptos(request):
         'selected_cryptos': selected_cryptos,
         'all_names': all_names,
     })
+
+def price_vs_volume(request):
+    index_dir = "crypto_index"
+    crypto_data = []
+
+    try:
+        ix = create_or_open_index(index_dir)
+        with ix.searcher() as searcher:
+            for doc in searcher.all_stored_fields():
+                crypto_data.append({
+                    'name': doc['name'],
+                    'price': float(doc['price']),
+                    'volume': float(doc['volume']),
+                })
+    except Exception as e:
+        print(f"Error retrieving data: {e}")
+
+    if crypto_data:
+        # Generate scatter plot with price vs volume
+        fig = px.scatter(
+            crypto_data,
+            x='volume',
+            y='price',
+            hover_name='name',
+            labels={'volume': 'Volume', 'price': 'Price (USD)'},
+        )
+        fig.update_layout(template='plotly_white')
+        chart = fig.to_html(full_html=False)
+    else:
+        chart = None
+
+    return render(request, 'scraper/price_vs_volume.html', {'chart': chart})

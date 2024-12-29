@@ -9,5 +9,6 @@ urlpatterns = [
     path('filter-by-price/', views.filter_by_price, name='filter_by_price'),
     path('market-cap-distribution/', views.market_cap_distribution, name='market_cap_distribution'),
     path('compare-cryptos/', views.compare_cryptos, name='compare_cryptos'),
+    path('price-vs-volume/', views.price_vs_volume, name='price_vs_volume'),
 
 ]

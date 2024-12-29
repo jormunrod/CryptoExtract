@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="chart-container">
+    <h1>Price vs. Volume of Cryptocurrencies</h1>
+
+    {% if chart %}
+        <div class="plotly-chart">
+            {{ chart|safe }}
+        </div>
+    {% else %}
+        <p>No data available to display the graph.</p>
+    {% endif %}
+</div>
+{% endblock %}
