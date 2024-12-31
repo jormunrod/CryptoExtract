@@ -34,7 +34,7 @@ CryptoExtract is a web application designed as a final project for the course **
 ## Setup Instructions
 
 ### Prerequisites
-- Python 3.8 or higher
+- Python 3.12 or higher
 - `pip` for installing Python packages
 
 ### Installation
